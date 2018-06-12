@@ -1,7 +1,6 @@
 import com.baizhi.App;
-import com.baizhi.dao.UserMapper;
+import com.baizhi.dao1.UserDAO;
 import com.baizhi.entity.User;
-import org.junit.internal.Classes;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,15 +15,15 @@ import java.util.List;
 @SpringBootTest(classes = App.class)
 public class UserTest {
     @Autowired
-    private UserMapper userMapper;
+    private UserDAO userDAO;
     public void test1(){
-        List<User> users = userMapper.queryAll();
+        List<User> users = userDAO.selectUser(1, 10);
         for (User user : users) {
             System.out.println(user);
         }
     }
     public void test2(){
-        User user = userMapper.queryById(1);
+        User user = userDAO.queryById(1);
         System.out.println(user);
     }
 }
