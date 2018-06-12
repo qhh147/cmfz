@@ -1,0 +1,59 @@
+[
+  {
+    "id": "customer",
+    "text": "请选择",
+    "iconCls": "icon-add",
+    "state": "open",
+    "children": [
+      {
+        "text": "编号",
+        "id": "id"
+      },
+      {
+        "text": "名字",
+        "id": "username"
+      },
+      {
+        "text": "密码",
+        "id": "password"
+      },{
+        "text": "注册日期",
+        "id": "bdate"
+      },
+      {
+        "text": "法号",
+        "id": "farmington"
+      },{
+        "text": "昵称",
+        "id": "nickname"
+      },
+      {
+        "text": "性别",
+        "id": "sex"
+      },
+      {
+        "text": "所在省",
+        "id": "province"
+      },
+      {
+        "text": "所在市",
+        "id": "city"
+      },{
+        "text": "详细地区",
+        "id": "location"
+      },
+      {
+        "text": "个人签名",
+        "id": "description"
+      },
+      {
+        "text": "电话",
+        "id": "phone"
+      },
+      {
+        "text": "账号状态",
+        "id": "status"
+      }
+    ]
+  }
+]

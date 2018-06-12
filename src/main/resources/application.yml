@@ -1,0 +1,27 @@
+server:
+  jsp-servlet:
+    init-parameters:
+      development: true
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/zpark
+  profiles:
+    active: test
+mybatis:
+  mapper-locations: com/baizhi/mapper/*.xml
+  type-aliases-package: com.baizhi.entity
+
+
+

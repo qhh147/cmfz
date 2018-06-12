@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao1.UserDAO">
+   <select id="queryAll" resultType="AddressSort">
+       SELECT province,count(*) counts from user GROUP BY province
+   </select>
+    <select id="query" resultType="User">
+        SELECT * from user
+    </select>
+    <select id="selectUser" resultType="User">
+        select *
+        from user LIMIT #{begin},#{end}
+    </select>
+    <select id="queryCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM user
+    </select>
+    <update id="updateUser">
+        UPDATE user SET status=#{status} WHERE id=#{id}
+    </update>
+    <insert id="insertUser">
+        <selectKey resultType="Integer" keyProperty="id" order="AFTER">
+            SELECT last_insert_id() AS id
+        </selectKey>
+        INSERT INTO user(id,username,password,farmington,nickname,sex,headPic,province,city,location,description,phone,shangshi,status,bdate) values(#{id},#{username},#{password},#{farmington},#{nickname},#{sex},#{headPic},#{province},#{city},#{location},#{description},#{phone},#{shangshi},#{status},#{bdate})
+    </insert>
+
+    <select id="queryByName" resultType="User">
+        SELECT * FROM user WHERE username=#{username}
+    </select>
+    <select id="queryById" resultType="User">
+        SELECT * FROM user WHERE id=#{id}
+    </select>
+    <select id="queryByPhone" resultType="User">
+        SELECT * FROM user WHERE phone=#{phone}
+    </select>
+    <update id="updateUseMSG" parameterType="User">
+        update user
+        <set >
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="farmington != null" >
+                farmington = #{farmington,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null" >
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                sex = #{sex,jdbcType=CHAR},
+            </if>
+            <if test="headPic != null" >
+                headPic = #{headPic,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="location != null" >
+                location = #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <update id="updatePass">
+        UPDATE user SET password=#{password} WHERE username=#{username}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

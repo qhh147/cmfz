@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao1.LogDAO">
+   <select id="queryAll" resultType="Log">
+       select * from log LIMIT #{begin},#{end}
+   </select>
+    <select id="queryCount" resultType="java.lang.Integer">
+        SELECT count(*) from log
+    </select>
+    <insert id="insert">
+        <selectKey resultType="Integer" keyProperty="id" order="AFTER">
+            SELECT last_insert_id() AS id
+        </selectKey>
+        insert into log(id,username,dodate,things,result) values(#{id},#{username},#{dodate},#{things},#{result})
+    </insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao1.ZhangjieDAO">
+    <insert id="insertZE">
+        <selectKey resultType="Integer" keyProperty="id" order="AFTER">
+            SELECT last_insert_id() AS id
+        </selectKey>
+        INSERT INTO zhangjie(id,title,size,duration,downPath,uploadDate,pid) VALUES(#{id},#{title},#{size},#{duration},#{downPath},#{uploadDate},#{pid})
+    </insert>
+    <select id="queryCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM zhangjie
+    </select>
+
+    <select id="queryAll" resultType="Zhangjie">
+        SELECT * FROM zhangjie WHERE pid=#{pid}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

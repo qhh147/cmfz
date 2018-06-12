@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao1.RingimgDAO">
+    <select id="queryAll" resultType="Ringimg">
+        select *
+        from ringimg LIMIT #{begin},#{end}
+    </select>
+    <select id="queryAllRimg" resultType="Ringimg">
+        select *
+        from ringimg WHERE rstatus='y'
+    </select>
+    <select id="queryCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM ringimg
+    </select>
+    <insert id="insert">
+        <selectKey resultType="Integer" keyProperty="id" order="AFTER">
+          SELECT last_insert_id() AS id
+        </selectKey>
+        INSERT INTO ringimg(id,title,imgPath,rdesc,rstatus,create_date) VALUES(#{id},#{title},#{imgPath},#{rdesc},#{rstatus},#{create_date})
+    </insert>
+    <update id="update">
+        UPDATE ringimg SET rstatus=#{rstatus} WHERE id=#{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM ringimg WHERE id=#{id}
+    </delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao1.ZhuanjiDAO">
+
+    <resultMap id="rm" type="Zhuanji">
+        <id column="m1_id" property="id"/>
+        <result column="m1_imgPath" property="imgPath"/>
+        <result column="m1_title" property="title"/>
+        <result column="m1_setCount" property="setCount"/>
+        <result column="m1_createDate" property="createDate"/>
+        <result column="m1_score" property="score"/>
+        <result column="m1_author" property="author"/>
+        <result column="m1_broadcast" property="broadcast"/>
+        <result column="m1_brief" property="brief"/>
+        <collection property="children" ofType="Zhangjie">
+            <id column="m2_id" property="id"/>
+            <result column="m2_title" property="title"/>
+            <result column="m2_size" property="size"/>
+            <result column="m2_duration" property="duration"/>
+            <result column="m2_downPath" property="downPath"/>
+            <result column="m2_uploadDate" property="uploadDate"/>
+            <result column="m2_pid" property="pid"/>
+        </collection>
+    </resultMap>
+    <select id="queryAll" resultMap="rm">
+        select m1.id m1_id, m1.imgPath m1_imgPath,m1.title m1_title,m1.setCount m1_setCount,m1.createDate m1_createDate, m1.score m1_score, m1.author m1_author, m1.broadcast m1_broadcast, m1.brief m1_brief,m2.id m2_id,m2.title m2_title,m2.size m2_size,m2.duration m2_duration, m2.downPath m2_downPath, m2.uploadDate m2_uploadDate, m2.pid m2_pid
+        from zhuanji m1 LEFT join zhangjie m2
+        on m1.id=m2.pid
+        LIMIT #{begin},#{end}
+    </select>
+
+    <select id="queryNew" resultMap="rm">
+        SELECT m1.id m1_id, m1.imgPath m1_imgPath,m1.title m1_title,m1.setCount m1_setCount,m1.createDate m1_createDate, m1.score m1_score, m1.author m1_author, m1.broadcast m1_broadcast, m1.brief m1_brief,m2.id m2_id,m2.title m2_title,m2.size m2_size,m2.duration m2_duration, m2.downPath m2_downPath, m2.uploadDate m2_uploadDate, m2.pid m2_pid
+        FROM(
+        select *
+        from zhuanji
+        ORDER BY createDate DESC
+        LIMIT 0,6)m1 LEFT JOIN zhangjie m2
+        ON m1.id=m2.pid
+    </select>
+    <select id="queryNews" resultMap="rm">
+        select m1.id m1_id, m1.imgPath m1_imgPath,m1.title m1_title,m1.setCount m1_setCount,m1.createDate m1_createDate, m1.score m1_score, m1.author m1_author, m1.broadcast m1_broadcast, m1.brief m1_brief,m2.id m2_id,m2.title m2_title,m2.size m2_size,m2.duration m2_duration, m2.downPath m2_downPath, m2.uploadDate m2_uploadDate, m2.pid m2_pid
+        from zhuanji m1 LEFT join zhangjie m2
+        on m1.id=m2.pid
+    </select>
+    <select id="queryById" resultMap="rm">
+        select m1.id m1_id, m1.imgPath m1_imgPath,m1.title m1_title,m1.setCount m1_setCount,m1.createDate m1_createDate, m1.score m1_score, m1.author m1_author, m1.broadcast m1_broadcast, m1.brief m1_brief,m2.id m2_id,m2.title m2_title,m2.size m2_size,m2.duration m2_duration, m2.downPath m2_downPath, m2.uploadDate m2_uploadDate, m2.pid m2_pid
+        from zhuanji m1 LEFT join zhangjie m2
+        on m1.id=m2.pid
+        WHERE m1.id=#{id}
+    </select>
+
+    <select id="queryCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM zhuanji
+    </select>
+    <insert id="insert">
+        <selectKey resultType="Integer" keyProperty="id" order="AFTER">
+          SELECT last_insert_id() AS id
+        </selectKey>
+        INSERT INTO zhuanji(id,imgPath,title,setCount,createDate,score,author,broadcast,brief) VALUES(#{id},#{imgPath},#{title},#{setCount},#{createDate},#{score},#{author},#{broadcast},#{brief})
+    </insert>
+    <update id="update">
+        UPDATE zhuanji SET imgPath=#{imgPath},title=#{title},setCount=#{setCount},createDate=#{createDate},score=#{score},author=#{author},broadcast=#{broadcast},brief=#{brief} WHERE id=#{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM zhuanji WHERE id=#{id}
+    </delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
